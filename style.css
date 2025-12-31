@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+  margin: 0;
+  background: black;
+  color: #00ff88;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.terminal {
+  padding: 30px;
+}
+
+.terminal-title {
+  text-align: center;
+  letter-spacing: 4px;
+  margin-bottom: 30px;
+}
+
+.node-grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.song-node {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #00ff88;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.song-node:hover {
+  background: #00ff88;
+  color: black;
+  box-shadow: 0 0 20px #00ff88;
+}
+
+.player {
+  margin-top: 40px;
+  text-align: center;
+}
+
+audio {
+  margin-top: 10px;
+  width: 300px;
+}
+
+.lyrics {
+  margin-top: 30px;
+  background: rgba(0, 255, 136, 0.05);
+  padding: 20px;
+  border-left: 3px solid #00ff88;
+  white-space: pre-wrap;
+}
