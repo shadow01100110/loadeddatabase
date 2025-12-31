@@ -133,7 +133,9 @@ export default function SongPlayer() {
       normalize: true,
     });
 
-    wavesurfer.current.load(`/songfiles/${id}.wav`);
+    const BASE = "/loadeddatabase";
+    wavesurfer.current.load(`${BASE}/songfiles/${id}.wav`);
+    
     wavesurfer.current.setVolume(volume);
 
     wavesurfer.current.on("finish", () => setIsPlaying(false));
@@ -192,7 +194,12 @@ export default function SongPlayer() {
             {isPlaying ? "PAUSE" : "PLAY"}
           </button>
 
-          <a href={`/songfiles/${id}.wav`} download style={buttonStyle}>
+          <a
+            href={`/loadeddatabase/songfiles/${id}.wav`}
+            download
+            style={buttonStyle}
+          >
+            
             DOWNLOAD
           </a>
         </div>
