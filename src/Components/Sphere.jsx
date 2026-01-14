@@ -58,7 +58,7 @@ export default function Sphere({ onSongClick }) {
       return [x1, y1, z2];
     };
 
-    // Latitude lines
+    // Latitude & longitude lines
     for (let lat = -80; lat <= 80; lat += 20) {
       ctx.beginPath();
       for (let lon = 0; lon <= 360; lon += 6) {
@@ -73,7 +73,6 @@ export default function Sphere({ onSongClick }) {
       ctx.stroke();
     }
 
-    // Longitude lines
     for (let lon = 0; lon < 360; lon += 30) {
       ctx.beginPath();
       for (let lat = -90; lat <= 90; lat += 4) {
@@ -124,7 +123,7 @@ export default function Sphere({ onSongClick }) {
     return { x: size / 2 + x1 * scale, y: size / 2 + y1 * scale };
   };
 
-  /* ---------------- MOUSE ---------------- */
+  /* ---------------- MOUSE (PC) ---------------- */
   const handleMouseMove = e => {
     const rect = canvasRef.current.getBoundingClientRect();
     const mx = e.clientX - rect.left;
@@ -167,8 +166,10 @@ export default function Sphere({ onSongClick }) {
   const onTouchEnd = e => {
     e.preventDefault();
     if (!e.changedTouches || e.changedTouches.length === 0) return;
-    const touchX = e.changedTouches[0].clientX;
-    const touchY = e.changedTouches[0].clientY;
+
+    const rect = canvasRef.current.getBoundingClientRect();
+    const touchX = e.changedTouches[0].clientX - rect.left;
+    const touchY = e.changedTouches[0].clientY - rect.top;
 
     let tappedNode = null;
     SONGS.forEach(song => {
@@ -185,11 +186,12 @@ export default function Sphere({ onSongClick }) {
       onSongClick(tappedNode.slug);
       lastTappedNode.current = null;
     } else {
+      const rectAbs = canvasRef.current.getBoundingClientRect();
       setHovered({
         name: tappedNode.name,
         slug: tappedNode.slug,
-        screenX: touchX,
-        screenY: touchY,
+        screenX: rectAbs.left + projectPoint(tappedNode).x,
+        screenY: rectAbs.top + projectPoint(tappedNode).y,
       });
       lastTappedNode.current = tappedNode;
       lastTapTime.current = now;

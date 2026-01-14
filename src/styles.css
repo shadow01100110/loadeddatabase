@@ -313,7 +313,6 @@ body {
   width: 0;
 }
 
-
 /* ===================================================== */
 /* FINAL CRT TERMINAL EFFECT — STABLE + RETRO            */
 /* ===================================================== */
@@ -573,7 +572,7 @@ body {
   /* Social buttons BELOW title, ABOVE sphere */
   .social-panel {
     position: relative;
-    display: flex;               /* 🔴 THIS WAS MISSING */
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -603,9 +602,6 @@ body {
   }
 }
 
-
-
-
 @media (max-width: 768px) {
   .sphere-page {
     overflow: visible;
@@ -622,5 +618,4 @@ body {
     z-index: 5;
   }
 }
-
 
