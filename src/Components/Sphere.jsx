@@ -11,6 +11,8 @@ const SONGS = [
 
 export default function Sphere({ onSongClick }) {
   const canvasRef = useRef(null);
+  const lastTouch = useRef(null);
+
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -19,6 +21,7 @@ export default function Sphere({ onSongClick }) {
   const radius = 180;
   const perspective = 600;
 
+  /* Auto rotation */
   useEffect(() => {
     let frame;
     const loop = () => {
@@ -29,9 +32,11 @@ export default function Sphere({ onSongClick }) {
     return () => cancelAnimationFrame(frame);
   }, []);
 
+  /* Drawing */
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+
     ctx.clearRect(0, 0, size, size);
     ctx.strokeStyle = "rgba(0,255,0,0.4)";
     ctx.setLineDash([4, 6]);
@@ -51,6 +56,7 @@ export default function Sphere({ onSongClick }) {
       let z1 = x * sinY + z * cosY;
       let y1 = y * cosX - z1 * sinX;
       let z2 = y * sinX + z1 * cosX;
+
       return [x1, y1, z2];
     };
 
@@ -60,9 +66,11 @@ export default function Sphere({ onSongClick }) {
       for (let lon = 0; lon <= 360; lon += 6) {
         const latR = (lat * Math.PI) / 180;
         const lonR = (lon * Math.PI) / 180;
-        let x = radius * Math.cos(latR) * Math.cos(lonR);
-        let y = radius * Math.sin(latR);
-        let z = radius * Math.cos(latR) * Math.sin(lonR);
+
+        const x = radius * Math.cos(latR) * Math.cos(lonR);
+        const y = radius * Math.sin(latR);
+        const z = radius * Math.cos(latR) * Math.sin(lonR);
+
         const p = project(rotate([x, y, z]));
         lon === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
       }
@@ -75,22 +83,26 @@ export default function Sphere({ onSongClick }) {
       for (let lat = -90; lat <= 90; lat += 4) {
         const latR = (lat * Math.PI) / 180;
         const lonR = (lon * Math.PI) / 180;
-        let x = radius * Math.cos(latR) * Math.cos(lonR);
-        let y = radius * Math.sin(latR);
-        let z = radius * Math.cos(latR) * Math.sin(lonR);
+
+        const x = radius * Math.cos(latR) * Math.cos(lonR);
+        const y = radius * Math.sin(latR);
+        const z = radius * Math.cos(latR) * Math.sin(lonR);
+
         const p = project(rotate([x, y, z]));
         lat === -90 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
       }
       ctx.stroke();
     }
 
-    // Draw nodes
+    // Song nodes
     SONGS.forEach(song => {
       const latR = (song.lat * Math.PI) / 180;
       const lonR = (song.lon * Math.PI) / 180;
-      let x = radius * Math.cos(latR) * Math.cos(lonR);
-      let y = radius * Math.sin(latR);
-      let z = radius * Math.cos(latR) * Math.sin(lonR);
+
+      const x = radius * Math.cos(latR) * Math.cos(lonR);
+      const y = radius * Math.sin(latR);
+      const z = radius * Math.cos(latR) * Math.sin(lonR);
+
       const p = project(rotate([x, y, z]));
       ctx.beginPath();
       ctx.fillStyle = "#00ff00";
@@ -99,27 +111,30 @@ export default function Sphere({ onSongClick }) {
     });
   }, [rotation]);
 
+  /* Projection for hover detection */
   const projectPoint = song => {
     const latR = (song.lat * Math.PI) / 180;
     const lonR = (song.lon * Math.PI) / 180;
-    let x = radius * Math.cos(latR) * Math.cos(lonR);
-    let y = radius * Math.sin(latR);
-    let z = radius * Math.cos(latR) * Math.sin(lonR);
+
+    const x = radius * Math.cos(latR) * Math.cos(lonR);
+    const y = radius * Math.sin(latR);
+    const z = radius * Math.cos(latR) * Math.sin(lonR);
 
     const cosY = Math.cos(rotation.y);
     const sinY = Math.sin(rotation.y);
     const cosX = Math.cos(rotation.x);
     const sinX = Math.sin(rotation.x);
 
-    let x1 = x * cosY - z * sinY;
-    let z1 = x * sinY + z * cosY;
-    let y1 = y * cosX - z1 * sinX;
-    let z2 = y * sinX + z1 * cosX;
+    const x1 = x * cosY - z * sinY;
+    const z1 = x * sinY + z * cosY;
+    const y1 = y * cosX - z1 * sinX;
+    const z2 = y * sinX + z1 * cosX;
 
     const scale = perspective / (perspective + z2);
     return { x: size / 2 + x1 * scale, y: size / 2 + y1 * scale };
   };
 
+  /* Mouse hover */
   const handleMouseMove = e => {
     const rect = canvasRef.current.getBoundingClientRect();
     const mx = e.clientX - rect.left;
@@ -137,11 +152,40 @@ export default function Sphere({ onSongClick }) {
     setHovered(found);
   };
 
+  /* Mouse drag */
   const onMouseDown = () => setDragging(true);
   const onMouseUp = () => setDragging(false);
   const onDrag = e => {
     if (!dragging) return;
-    setRotation(r => ({ x: r.x + e.movementY * 0.002, y: r.y + e.movementX * 0.002 }));
+    setRotation(r => ({
+      x: r.x + e.movementY * 0.002,
+      y: r.y + e.movementX * 0.002,
+    }));
+  };
+
+  /* TOUCH ROTATION (MOBILE) */
+  const onTouchStart = e => {
+    const touch = e.touches[0];
+    lastTouch.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const onTouchMove = e => {
+    if (!lastTouch.current) return;
+    const touch = e.touches[0];
+
+    const dx = touch.clientX - lastTouch.current.x;
+    const dy = touch.clientY - lastTouch.current.y;
+
+    setRotation(r => ({
+      x: r.x + dy * 0.002,
+      y: r.y + dx * 0.002,
+    }));
+
+    lastTouch.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const onTouchEnd = () => {
+    lastTouch.current = null;
   };
 
   const onClick = () => {
@@ -164,9 +208,16 @@ export default function Sphere({ onSongClick }) {
         onMouseLeave={() => setHovered(null)}
         onMouseMoveCapture={onDrag}
         onClick={onClick}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       />
+
       {hovered && (
-        <div className="song-tooltip" style={{ top: hovered.screenY + 14, left: hovered.screenX + 14 }}>
+        <div
+          className="song-tooltip"
+          style={{ top: hovered.screenY + 14, left: hovered.screenX + 14 }}
+        >
           <span>{hovered.name}</span>
         </div>
       )}

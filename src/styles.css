@@ -562,4 +562,36 @@ body {
   margin-left: 10px; /* space between submit and back button */
 }
 
+/* ================= MOBILE ONLY ================= */
+@media (max-width: 768px) {
+
+  /* Hide update log on phones */
+  .update-log-wrapper {
+    display: none;
+  }
+
+  /* Smaller social buttons in corner */
+  .social-panel {
+    left: 12px;
+    bottom: 12px;
+    top: auto;
+    transform: none;
+
+    gap: 8px;
+  }
+
+  .social-panel a {
+    padding: 8px;
+  }
+
+  .social-panel svg {
+    font-size: 1.2rem;
+  }
+
+  /* Ensure sphere always gets touch input */
+  .sphere-canvas {
+    touch-action: none;
+  }
+}
+
 
