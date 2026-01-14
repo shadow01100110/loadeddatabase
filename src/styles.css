@@ -604,3 +604,23 @@ body {
 }
 
 
+
+
+@media (max-width: 768px) {
+  .sphere-page {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .sphere-canvas {
+    position: relative;
+    z-index: 1;
+  }
+
+  .social-panel {
+    z-index: 5;
+  }
+}
+
+
