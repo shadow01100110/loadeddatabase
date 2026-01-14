@@ -313,6 +313,7 @@ body {
   width: 0;
 }
 
+
 /* ===================================================== */
 /* FINAL CRT TERMINAL EFFECT — STABLE + RETRO            */
 /* ===================================================== */
@@ -569,23 +570,20 @@ body {
     display: none;
   }
 
-  /* Social buttons BELOW title, ABOVE sphere */
+  /* Social buttons ABOVE sphere */
   .social-panel {
-    position: relative;
-    display: flex;
-    flex-direction: row;
+    position: relative;        /* stays relative on mobile */
+    display: flex;             /* ensures flex layout */
+    flex-direction: row;       /* horizontal */
     justify-content: center;
     align-items: center;
-
-    margin: 14px auto 10px auto;
-    gap: 18px;
+    margin: 0 0 16px 0;        /* space below buttons before sphere */
+    z-index: 10;               /* above the sphere canvas */
 
     left: auto;
-    bottom: auto;
     top: auto;
+    bottom: auto;
     transform: none;
-
-    z-index: 3;
   }
 
   .social-panel a {
@@ -618,4 +616,3 @@ body {
     z-index: 5;
   }
 }
-
