@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from "react";
 
-// Song database
 const SONGS = [
   { id: 1, name: "Seek ft. duvidha", slug: "seek-ft.-duvidha", lat: 30, lon: 60 },
   { id: 2, name: "Cyberstar ORIGINAL", slug: "cyberstar", lat: -20, lon: 120 },
@@ -52,14 +51,14 @@ export default function Sphere({ onSongClick }) {
       const sinY = Math.sin(rotation.y);
       const cosX = Math.cos(rotation.x);
       const sinX = Math.sin(rotation.x);
-
-      let x1 = x * cosY - z * sinY;
-      let z1 = x * sinY + z * cosY;
-      let y1 = y * cosX - z1 * sinX;
-      let z2 = y * sinX + z1 * cosX;
+      const x1 = x * cosY - z * sinY;
+      const z1 = x * sinY + z * cosY;
+      const y1 = y * cosX - z1 * sinX;
+      const z2 = y * sinX + z1 * cosX;
       return [x1, y1, z2];
     };
 
+    // Latitude lines
     for (let lat = -80; lat <= 80; lat += 20) {
       ctx.beginPath();
       for (let lon = 0; lon <= 360; lon += 6) {
@@ -74,6 +73,7 @@ export default function Sphere({ onSongClick }) {
       ctx.stroke();
     }
 
+    // Longitude lines
     for (let lon = 0; lon < 360; lon += 30) {
       ctx.beginPath();
       for (let lat = -90; lat <= 90; lat += 4) {
@@ -88,6 +88,7 @@ export default function Sphere({ onSongClick }) {
       ctx.stroke();
     }
 
+    // Draw nodes
     SONGS.forEach(song => {
       const latR = (song.lat * Math.PI) / 180;
       const lonR = (song.lon * Math.PI) / 180;
@@ -150,10 +151,12 @@ export default function Sphere({ onSongClick }) {
 
   /* ---------------- TOUCH / MOBILE ---------------- */
   const onTouchStart = e => {
+    e.preventDefault();
     lastTouch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   };
 
   const onTouchMove = e => {
+    e.preventDefault();
     if (!lastTouch.current) return;
     const dx = e.touches[0].clientX - lastTouch.current.x;
     const dy = e.touches[0].clientY - lastTouch.current.y;
@@ -162,13 +165,11 @@ export default function Sphere({ onSongClick }) {
   };
 
   const onTouchEnd = e => {
-    lastTouch.current = null;
-
+    e.preventDefault();
     if (!e.changedTouches || e.changedTouches.length === 0) return;
     const touchX = e.changedTouches[0].clientX;
     const touchY = e.changedTouches[0].clientY;
 
-    // detect tapped node
     let tappedNode = null;
     SONGS.forEach(song => {
       const p = projectPoint(song);
@@ -181,23 +182,20 @@ export default function Sphere({ onSongClick }) {
 
     const now = Date.now();
     if (lastTappedNode.current?.slug === tappedNode.slug && now - lastTapTime.current < 400) {
-      // double-tap detected => enter song
       onSongClick(tappedNode.slug);
       lastTappedNode.current = null;
     } else {
-      // first tap => show hover tooltip
-      setHovered({ 
-        name: tappedNode.name, 
-        slug: tappedNode.slug, 
-        screenX: touchX, 
-        screenY: touchY 
+      setHovered({
+        name: tappedNode.name,
+        slug: tappedNode.slug,
+        screenX: touchX,
+        screenY: touchY,
       });
       lastTappedNode.current = tappedNode;
       lastTapTime.current = now;
     }
   };
 
-  /* ---------------- CLICK ---------------- */
   const onClick = () => {
     if (hovered) onSongClick(hovered.slug);
   };
