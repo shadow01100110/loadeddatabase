@@ -1,5 +1,4 @@
 import { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 // Song database
 const SONGS = [
@@ -7,11 +6,11 @@ const SONGS = [
   { id: 2, name: "Cyberstar ORIGINAL", slug: "cyberstar", lat: -20, lon: 120 },
   { id: 3, name: "Originz ORIGINAL ft. duvidha", slug: "originz-ft.-duvidha-original", lat: 101, lon: 180 },
   { id: 4, name: "Lost Files", slug: "lost-files", lat: -10, lon: 250 },
+  { id: 5, name: "FYE (Solo)", slug: "fye-solo", lat: -60, lon: 60 },
 ];
 
-export default function Sphere() {
+export default function Sphere({ onSongClick }) {
   const canvasRef = useRef(null);
-  const navigate = useNavigate();
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const [hovered, setHovered] = useState(null);
@@ -20,18 +19,16 @@ export default function Sphere() {
   const radius = 180;
   const perspective = 600;
 
-  // ---------------- AUTO ROTATION ----------------
   useEffect(() => {
     let frame;
     const loop = () => {
-      setRotation(r => ({ x: r.x, y: r.y + 0.00015 })); // slow horizontal rotation
+      setRotation(r => ({ x: r.x, y: r.y + 0.00015 }));
       frame = requestAnimationFrame(loop);
     };
     loop();
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  // ---------------- DRAW SPHERE ----------------
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -102,7 +99,6 @@ export default function Sphere() {
     });
   }, [rotation]);
 
-  // ---------------- HOVER DETECTION ----------------
   const projectPoint = song => {
     const latR = (song.lat * Math.PI) / 180;
     const lonR = (song.lon * Math.PI) / 180;
@@ -148,10 +144,9 @@ export default function Sphere() {
     setRotation(r => ({ x: r.x + e.movementY * 0.002, y: r.y + e.movementX * 0.002 }));
   };
 
-  // ---------------- NODE CLICK ----------------
   const onClick = () => {
     if (hovered) {
-      navigate(`/song/${hovered.slug}`); // navigate to SongPlayer
+      onSongClick(hovered.slug);
     }
   };
 

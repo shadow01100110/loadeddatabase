@@ -58,7 +58,7 @@ seek, kill, fuck and die decay
 seek, kill, fuck and die decay
 `,
 
-"cyberstar": `Lyrics:
+  "cyberstar": `Lyrics:
 
 whoo
 whoo
@@ -101,12 +101,95 @@ cyberstar start drippin
 on the neuro-gas we tippin
 `,
 
-"lost-files": `Loaded Tape V3 | Unloaded Tape Prelude
+  "lost-files": `Loaded Tape V3 | Unloaded Tape Prelude
 
 they wont like us
 they wont find us
 they wont stop us
 `,
+
+  "fye-solo": `Lyrics:
+
+hollup sis, sumn up
+yo spit fam. Yeah, we up we up
+shit tonight fam?
+aight then, i'll bring the goods n that
+oh and, tell them motherfuckin boys we doin this
+shit finna be fye
+
+
+fye, whoo
+fye, fhoo
+yee, fye, whoo, fyeeeee
+mhmm, mhmm, mhmm, fool go
+back in the stu, go flow
+we ain't goin back home
+run up on brothers on fellas
+she so fine, she one of my dealers 
+got too many bitches on film yea
+i just banged the shit outta her yea
+we fuckn round the block yea
+the sirens right out the condo yeah
+
+let's go, thats trill yea
+let's blow, thats flow yea 
+let's go
+too fye
+too fye
+too fye
+too fye
+too fye for your bitch
+too fye for this list
+too fye for your shit
+boys
+
+i put my dick in her mouth, she slurp my kids up
+i got me this exotic shi huh, put the ice in my drank huh
+she a fan yuh
+anything for the cuh yea
+clubbin with yo cut hmm
+
+outside with the draco, please dont film
+censor the shit, we ain't gon go
+they wanna see the jackboys yap
+face, Ass press, bend over that fat ass
+big titties bouncin cross the damn dash
+
+slim lap ain't phase me yeah, i do whatever i please hmm
+hope we become the next big scene, off tha lean
+off tha lean, in the hills, we on flames bitch
+the sirens right out the condo yeah
+
+let's go, thats trill yea
+let's blow, thats flow yea 
+let's go
+too fye
+too fye
+too fye
+too fye
+too fye for your bitch
+too fye for this list
+too fye for your shit
+
+the sirens right out the condo yeah
+let's go, thats trill yea
+let's blow, thats flow yea 
+let's go
+too fye
+too fye
+too fye
+too fye
+too fye for your bitch
+too fye for this list
+too fye for your shit
+`,
+
+  "originz-ft.-duvidha-original": `
+
+the birth of Loaded RBL
+https://soundcloud.com/loaded-rbl/prod-sapjer-originz-ft-scotty-clouvre
+`,
+
 };
 
 export default function SongPlayer() {
@@ -117,7 +200,7 @@ export default function SongPlayer() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [lyrics, setLyrics] = useState("");
-  const [volume, setVolume] = useState(0.8);
+  const [volume, setVolume] = useState(0.5); // Start at 50%
 
   useEffect(() => {
     setLyrics(LYRICS_DB[id] || "No lyrics available.");
@@ -136,6 +219,7 @@ export default function SongPlayer() {
     const BASE = "/loadeddatabase";
     wavesurfer.current.load(`${BASE}/songfiles/${id}.wav`);
     
+    // Set volume to the 50% initial value
     wavesurfer.current.setVolume(volume);
 
     wavesurfer.current.on("finish", () => setIsPlaying(false));
@@ -199,7 +283,6 @@ export default function SongPlayer() {
             download
             style={buttonStyle}
           >
-            
             DOWNLOAD
           </a>
         </div>
@@ -236,7 +319,7 @@ export default function SongPlayer() {
             marginTop: "30px",
             height: "45vh",
             overflowY: "auto",
-            marginBottom: "60px", // 👈 space AFTER lyrics
+            marginBottom: "60px",
             whiteSpace: "pre-wrap",
             lineHeight: "1.6",
             textAlign: "center",
