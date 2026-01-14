@@ -570,14 +570,23 @@ body {
     display: none;
   }
 
-  /* Smaller social buttons in corner */
+  /* Social buttons BELOW title, ABOVE sphere */
   .social-panel {
-    left: 12px;
-    bottom: 12px;
+    position: relative;
+    display: flex;               /* 🔴 THIS WAS MISSING */
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin: 14px auto 10px auto;
+    gap: 18px;
+
+    left: auto;
+    bottom: auto;
     top: auto;
     transform: none;
 
-    gap: 8px;
+    z-index: 3;
   }
 
   .social-panel a {
@@ -588,26 +597,9 @@ body {
     font-size: 1.2rem;
   }
 
-  /* Ensure sphere always gets touch input */
+  /* Ensure sphere gets touch input */
   .sphere-canvas {
     touch-action: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .social-panel {
-    position: relative;          /* remove fixed positioning */
-    left: auto;
-    bottom: auto;
-
-    margin: 14px auto 10px auto; /* space above & below */
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: row;         /* horizontal row */
-    gap: 18px;
-
-    z-index: 3;
   }
 }
 
