@@ -594,4 +594,21 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  .social-panel {
+    position: relative;          /* remove fixed positioning */
+    left: auto;
+    bottom: auto;
+
+    margin: 14px auto 10px auto; /* space above & below */
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: row;         /* horizontal row */
+    gap: 18px;
+
+    z-index: 3;
+  }
+}
+
 
