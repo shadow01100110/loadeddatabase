@@ -694,7 +694,7 @@ body {
   .mobile-tap-hint {
     display: block;
     position: absolute;
-    top: calc(50% - 280px);
+    top: calc(50% - 295px);
     left: 50%;
     transform: translateX(-50%);
 
