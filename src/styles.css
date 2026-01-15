@@ -689,24 +689,27 @@ body {
 }
 
 
-@media (max-width: 768px) {
+/* Touch devices ONLY — never desktop */
+@media (hover: none) and (pointer: coarse) {
   .mobile-tap-hint {
-  display: block;
-  position: absolute;
-  top: calc(50% - 300px); /* just above the sphere */
-  left: 50%;
-  transform: translateX(-50%);
+    display: block;
+    position: absolute;
+    top: calc(50% - 260px);
+    left: 50%;
+    transform: translateX(-50%);
 
-  font-size: 0.6rem;
-  color: #00ff00;
-  opacity: 0.7;
-  font-family: monospace;
-  font-weight: normal;
+    font-size: 0.6rem;
+    color: #00ff00;
+    opacity: 0.7;
+    font-family: monospace;
+    font-weight: normal;
 
-  white-space: nowrap;   /* force single line */
-  pointer-events: none;
-  z-index: 20;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 20;
+  }
 }
 
 
-}
+
+
