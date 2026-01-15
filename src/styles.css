@@ -694,13 +694,13 @@ body {
   .mobile-tap-hint {
     display: block;
     position: absolute;
-    top: calc(50% - 315px);
+    top: calc(50% - 325px);
     left: 50%;
     transform: translateX(-50%);
 
-    font-size: 0.55rem;
+    font-size: 0.65rem;
     color: #00ff00;
-    opacity: 0.7;
+    opacity: 0.8;
     font-family: monospace;
     font-weight: normal;
 

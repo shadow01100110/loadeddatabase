@@ -250,7 +250,8 @@ export default function Sphere({ onSongClick }) {
     <>
  {/* Mobile-only tap instruction */}
 <div className="mobile-tap-hint">
-  For Mobile and Ipad Users: Single tap to see song title, Double tap quickly to open song
+  <span>For Mobile and Ipad Users: Single tap to see song title,</span> 
+  <span>Double tap quickly to open song</span>
 </div>
 
 
