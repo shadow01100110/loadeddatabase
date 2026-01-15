@@ -124,6 +124,7 @@ function SphereWrapper() {
           • Social buttons resized and new layout only on phone<br />
           • Single tap for song title, double tap on songnode to play the song for mobile and Ipad only<br />
           • Fixed autozoom issues on phone and Ipad<br />
+          • Fixed volume slider for phone<br />
           • Fixed Sphere dragging issues on PC<br />
           • Higher sensitivity for dragging the Sphere<br />
           • New error message displayed directly on website rather than browser for incorrect passkey inputs<br />
