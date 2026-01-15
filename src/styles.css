@@ -692,14 +692,21 @@ body {
 @media (max-width: 768px) {
   .mobile-tap-hint {
   display: block;
-  font-size: 0.75rem;
+  position: absolute;
+  top: calc(50% - 190px); /* just above the sphere */
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 0.7rem;
   color: #00ff00;
   opacity: 0.7;
-  margin-bottom: 6px;
-  text-align: center;
   font-family: monospace;
   font-weight: normal;
+
+  white-space: nowrap;   /* force single line */
   pointer-events: none;
+  z-index: 20;
 }
+
 
 }
