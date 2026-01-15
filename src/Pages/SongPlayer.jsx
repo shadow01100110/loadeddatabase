@@ -2,16 +2,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 
-/* ================= ADD ONLY ================= */
-/* iPhone Safari detection (required for slider fix) */
+/* iPhone Safari detection */
 const isIPhoneSafari =
   typeof navigator !== "undefined" &&
   /iPhone/.test(navigator.userAgent) &&
   /Safari/.test(navigator.userAgent) &&
   !/CriOS|FxiOS/.test(navigator.userAgent);
-/* ============================================ */
 
-// Lyrics database — NOW ONE STRING
 const LYRICS_DB = {
   "seek-ft.-duvidha": `Lyrics:
 
@@ -205,13 +202,11 @@ export default function SongPlayer() {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
 
-  /* ================= ADD ONLY ================= */
   const volumeRef = useRef(null);
-  /* ============================================ */
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [lyrics, setLyrics] = useState("");
-  const [volume, setVolume] = useState(0.5); // Start at 50%
+  const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
     setLyrics(LYRICS_DB[id] || "No lyrics available.");
@@ -236,13 +231,11 @@ export default function SongPlayer() {
     return () => wavesurfer.current.destroy();
   }, [id]);
 
-  /* ================= ADD ONLY ================= */
-  /* iPhone Safari slider touch fix */
+  /* iPhone slider touch fix (still safe even if hidden) */
   useEffect(() => {
     if (!isIPhoneSafari || !volumeRef.current) return;
 
     const slider = volumeRef.current;
-
     const allowTouch = (e) => {
       e.stopPropagation();
     };
@@ -255,7 +248,6 @@ export default function SongPlayer() {
       slider.removeEventListener("touchmove", allowTouch);
     };
   }, []);
-  /* ============================================ */
 
   const togglePlay = () => {
     wavesurfer.current.playPause();
@@ -313,35 +305,38 @@ export default function SongPlayer() {
           </a>
         </div>
 
-        <div
-          style={{
-            marginTop: "14px",
-            display: "flex",
-            justifyContent: "center",
-            gap: "10px",
-            fontSize: "0.85rem",
-          }}
-        >
-          VOL
-          <input
-            ref={volumeRef}
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={(e) => {
-              const v = parseFloat(e.target.value);
-              setVolume(v);
-              wavesurfer.current.setVolume(v);
-            }}
+        {/* ================= ONLY SHOW VOLUME ON NON-iPhone ================= */}
+        {!isIPhoneSafari && (
+          <div
             style={{
-              width: "140px",
-              accentColor: "#00ff00",
-              touchAction: "none",
+              marginTop: "14px",
+              display: "flex",
+              justifyContent: "center",
+              gap: "10px",
+              fontSize: "0.85rem",
             }}
-          />
-        </div>
+          >
+            VOL
+            <input
+              ref={volumeRef}
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={(e) => {
+                const v = parseFloat(e.target.value);
+                setVolume(v);
+                wavesurfer.current.setVolume(v);
+              }}
+              style={{
+                width: "140px",
+                accentColor: "#00ff00",
+                touchAction: "none",
+              }}
+            />
+          </div>
+        )}
 
         <div
           style={{
@@ -371,4 +366,4 @@ const buttonStyle = {
   borderRadius: "6px",
   cursor: "pointer",
   fontFamily: "monospace",
-};
+}; 
