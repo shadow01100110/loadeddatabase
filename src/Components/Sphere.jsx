@@ -153,50 +153,83 @@ export default function Sphere({ onSongClick }) {
   };
 
   /* ---------------- TOUCH / MOBILE ---------------- */
+  const touchStart = useRef(null);       // Initial touch position for tap detection
+  const touchMoved = useRef(false);      // Track if significant movement occurred
+  const TAP_THRESHOLD = 15;              // Pixels - movement below this is a tap
+
   const onTouchStart = e => {
     e.preventDefault();
-    lastTouch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    const touch = e.touches[0];
+    lastTouch.current = { x: touch.clientX, y: touch.clientY };
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+    touchMoved.current = false;
   };
 
   const onTouchMove = e => {
     e.preventDefault();
-    if (!lastTouch.current) return;
-    const dx = e.touches[0].clientX - lastTouch.current.x;
-    const dy = e.touches[0].clientY - lastTouch.current.y;
-    setRotation(r => ({ x: r.x + dy * 0.003, y: r.y + dx * 0.003 }));
-    lastTouch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    if (!lastTouch.current || !touchStart.current) return;
+    
+    const touch = e.touches[0];
+    const dx = touch.clientX - lastTouch.current.x;
+    const dy = touch.clientY - lastTouch.current.y;
+    
+    // Check total movement from start to detect if this is a drag
+    const totalDx = touch.clientX - touchStart.current.x;
+    const totalDy = touch.clientY - touchStart.current.y;
+    const totalDist = Math.sqrt(totalDx * totalDx + totalDy * totalDy);
+    
+    if (totalDist > TAP_THRESHOLD) {
+      touchMoved.current = true;
+      // Only rotate if we've moved beyond tap threshold
+      setRotation(r => ({ x: r.x + dy * 0.003, y: r.y + dx * 0.003 }));
+    }
+    
+    lastTouch.current = { x: touch.clientX, y: touch.clientY };
   };
 
   const onTouchEnd = e => {
     e.preventDefault();
     if (!e.changedTouches || e.changedTouches.length === 0) return;
-
-    const rect = canvasRef.current.getBoundingClientRect();
     
-    // Scale touch coordinates to canvas coordinate space (CSS may scale the canvas)
+    // If significant movement occurred, this was a drag not a tap
+    if (touchMoved.current) {
+      touchStart.current = null;
+      return;
+    }
+
+    // This is a tap - use the START position for hit detection (more accurate)
+    const rect = canvasRef.current.getBoundingClientRect();
     const scaleX = size / rect.width;
     const scaleY = size / rect.height;
-    const touchX = (e.changedTouches[0].clientX - rect.left) * scaleX;
-    const touchY = (e.changedTouches[0].clientY - rect.top) * scaleY;
+    
+    // Use touch start position for tap detection
+    const tapX = touchStart.current 
+      ? (touchStart.current.x - rect.left) * scaleX 
+      : (e.changedTouches[0].clientX - rect.left) * scaleX;
+    const tapY = touchStart.current 
+      ? (touchStart.current.y - rect.top) * scaleY 
+      : (e.changedTouches[0].clientY - rect.top) * scaleY;
 
     let tappedNode = null;
     SONGS.forEach(song => {
       const p = projectPoint(song);
-      const dx = touchX - p.x;
-      const dy = touchY - p.y;
-      // Increase hit radius slightly for mobile (scaled coordinates)
-      if (Math.sqrt(dx * dx + dy * dy) < 18) tappedNode = song;
+      const dx = tapX - p.x;
+      const dy = tapY - p.y;
+      // Hit radius for mobile tap detection
+      if (Math.sqrt(dx * dx + dy * dy) < 25) tappedNode = song;
     });
 
+    touchStart.current = null;
+    
     if (!tappedNode) return;
 
     const now = Date.now();
     if (lastTappedNode.current?.slug === tappedNode.slug && now - lastTapTime.current < 400) {
       onSongClick(tappedNode.slug);
       lastTappedNode.current = null;
+      setHovered(null);
     } else {
       const rectAbs = canvasRef.current.getBoundingClientRect();
-      // Calculate tooltip position accounting for CSS scale
       const nodePos = projectPoint(tappedNode);
       setHovered({
         name: tappedNode.name,
