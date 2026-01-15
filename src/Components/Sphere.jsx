@@ -143,9 +143,13 @@ export default function Sphere({ onSongClick }) {
 
   const onMouseDown = () => setDragging(true);
   const onMouseUp = () => setDragging(false);
+  const onMouseLeave = () => {
+    setDragging(false);  // Reset drag state when mouse leaves canvas
+    setHovered(null);
+  };
   const onDrag = e => {
     if (!dragging) return;
-    setRotation(r => ({ x: r.x + e.movementY * 0.002, y: r.y + e.movementX * 0.002 }));
+    setRotation(r => ({ x: r.x + e.movementY * 0.004, y: r.y + e.movementX * 0.004 }));
   };
 
   /* ---------------- TOUCH / MOBILE ---------------- */
@@ -168,15 +172,20 @@ export default function Sphere({ onSongClick }) {
     if (!e.changedTouches || e.changedTouches.length === 0) return;
 
     const rect = canvasRef.current.getBoundingClientRect();
-    const touchX = e.changedTouches[0].clientX - rect.left;
-    const touchY = e.changedTouches[0].clientY - rect.top;
+    
+    // Scale touch coordinates to canvas coordinate space (CSS may scale the canvas)
+    const scaleX = size / rect.width;
+    const scaleY = size / rect.height;
+    const touchX = (e.changedTouches[0].clientX - rect.left) * scaleX;
+    const touchY = (e.changedTouches[0].clientY - rect.top) * scaleY;
 
     let tappedNode = null;
     SONGS.forEach(song => {
       const p = projectPoint(song);
       const dx = touchX - p.x;
       const dy = touchY - p.y;
-      if (Math.sqrt(dx * dx + dy * dy) < 12) tappedNode = song;
+      // Increase hit radius slightly for mobile (scaled coordinates)
+      if (Math.sqrt(dx * dx + dy * dy) < 18) tappedNode = song;
     });
 
     if (!tappedNode) return;
@@ -187,11 +196,13 @@ export default function Sphere({ onSongClick }) {
       lastTappedNode.current = null;
     } else {
       const rectAbs = canvasRef.current.getBoundingClientRect();
+      // Calculate tooltip position accounting for CSS scale
+      const nodePos = projectPoint(tappedNode);
       setHovered({
         name: tappedNode.name,
         slug: tappedNode.slug,
-        screenX: rectAbs.left + projectPoint(tappedNode).x,
-        screenY: rectAbs.top + projectPoint(tappedNode).y,
+        screenX: rectAbs.left + (nodePos.x / scaleX),
+        screenY: rectAbs.top + (nodePos.y / scaleY),
       });
       lastTappedNode.current = tappedNode;
       lastTapTime.current = now;
@@ -213,7 +224,7 @@ export default function Sphere({ onSongClick }) {
         onMouseMove={handleMouseMove}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
-        onMouseLeave={() => setHovered(null)}
+        onMouseLeave={onMouseLeave}
         onMouseMoveCapture={onDrag}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
