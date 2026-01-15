@@ -117,17 +117,17 @@ function SphereWrapper() {
         <div className="update-log-header">UPDATE LOG V3.0</div>
         <div className="update-log-body">
           • Update 3.0 is here!<br />
-          • Mobile user friendly now! :) will be even more stable and better in future updates, but usable and functional right now<br />
-          • Rotatable Sphere on phone<br />
-          • Steady unscrollable horizontally screen on phone<br />
+          • Mobile and Ipad user friendly now! :) will be even more stable and better in future updates, but usable and functional right now<br />
+          • Rotatable Sphere on phone and Ipad<br />
+          • Steady unscrollable horizontally screen on phone and Ipad<br />
           • Update Log hidden only on phone<br />
           • Social buttons resized and new layout only on phone<br />
-          • Single tap for song title, double tap on songnode to play the song for mobile only<br />
-          • Fixed autozoom issues on phone<br />
+          • Single tap for song title, double tap on songnode to play the song for mobile and Ipad only<br />
+          • Fixed autozoom issues on phone and Ipad<br />
           • Fixed Sphere dragging issues on PC<br />
           • Higher sensitivity for dragging the Sphere<br />
           • New error message displayed directly on website rather than browser for incorrect passkey inputs<br />
-          • New message only for mobile users guiding them on how to use the website and open songnodes<br />
+          • New message only for mobile and Ipad users guiding them on how to use the website and open songnodes<br />
         </div>
       </div>
 

@@ -694,11 +694,11 @@ body {
   .mobile-tap-hint {
     display: block;
     position: absolute;
-    top: calc(50% - 260px);
+    top: calc(50% - 270px);
     left: 50%;
     transform: translateX(-50%);
 
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: #00ff00;
     opacity: 0.7;
     font-family: monospace;
