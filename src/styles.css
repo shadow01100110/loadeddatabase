@@ -693,7 +693,7 @@ body {
   .mobile-tap-hint {
   display: block;
   position: absolute;
-  top: calc(50% - 260px); /* just above the sphere */
+  top: calc(50% - 400px); /* just above the sphere */
   left: 50%;
   transform: translateX(-50%);
 
