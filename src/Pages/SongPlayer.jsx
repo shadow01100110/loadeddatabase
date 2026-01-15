@@ -2,12 +2,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 
-/* iPhone Safari detection */
-const isIPhoneSafari =
+// iPhone detection
+const isIPhone =
   typeof navigator !== "undefined" &&
   /iPhone/.test(navigator.userAgent) &&
-  /Safari/.test(navigator.userAgent) &&
-  !/CriOS|FxiOS/.test(navigator.userAgent);
+  !/iPad/.test(navigator.userAgent);
 
 const LYRICS_DB = {
   "seek-ft.-duvidha": `Lyrics:
@@ -201,7 +200,6 @@ export default function SongPlayer() {
   const navigate = useNavigate();
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
-
   const volumeRef = useRef(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -231,14 +229,11 @@ export default function SongPlayer() {
     return () => wavesurfer.current.destroy();
   }, [id]);
 
-  /* iPhone slider touch fix (still safe even if hidden) */
   useEffect(() => {
-    if (!isIPhoneSafari || !volumeRef.current) return;
+    if (!isIPhone || !volumeRef.current) return;
 
     const slider = volumeRef.current;
-    const allowTouch = (e) => {
-      e.stopPropagation();
-    };
+    const allowTouch = (e) => e.stopPropagation();
 
     slider.addEventListener("touchstart", allowTouch, { passive: true });
     slider.addEventListener("touchmove", allowTouch, { passive: true });
@@ -305,8 +300,8 @@ export default function SongPlayer() {
           </a>
         </div>
 
-        {/* ================= ONLY SHOW VOLUME ON NON-iPhone ================= */}
-        {!isIPhoneSafari && (
+        {/* HIDE VOLUME ON iPhone ONLY */}
+        {!isIPhone && (
           <div
             style={{
               marginTop: "14px",
@@ -366,4 +361,4 @@ const buttonStyle = {
   borderRadius: "6px",
   cursor: "pointer",
   fontFamily: "monospace",
-}; 
+};
