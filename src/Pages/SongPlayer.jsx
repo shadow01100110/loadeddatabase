@@ -2,6 +2,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 
+/* ================= ADD ONLY ================= */
+/* iPhone Safari detection (required for slider fix) */
+const isIPhoneSafari =
+  typeof navigator !== "undefined" &&
+  /iPhone/.test(navigator.userAgent) &&
+  /Safari/.test(navigator.userAgent) &&
+  !/CriOS|FxiOS/.test(navigator.userAgent);
+/* ============================================ */
+
 // Lyrics database — NOW ONE STRING
 const LYRICS_DB = {
   "seek-ft.-duvidha": `Lyrics:
@@ -185,11 +194,9 @@ too fye for your shit
 `,
 
   "originz-ft.-duvidha-original": `
-
 the birth of Loaded RBL
 https://soundcloud.com/loaded-rbl/prod-sapjer-originz-ft-scotty-clouvre
 `,
-
 };
 
 export default function SongPlayer() {
@@ -197,6 +204,10 @@ export default function SongPlayer() {
   const navigate = useNavigate();
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
+
+  /* ================= ADD ONLY ================= */
+  const volumeRef = useRef(null);
+  /* ============================================ */
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [lyrics, setLyrics] = useState("");
@@ -218,14 +229,33 @@ export default function SongPlayer() {
 
     const BASE = "/loadeddatabase";
     wavesurfer.current.load(`${BASE}/songfiles/${id}.wav`);
-    
-    // Set volume to the 50% initial value
-    wavesurfer.current.setVolume(volume);
 
+    wavesurfer.current.setVolume(volume);
     wavesurfer.current.on("finish", () => setIsPlaying(false));
 
     return () => wavesurfer.current.destroy();
   }, [id]);
+
+  /* ================= ADD ONLY ================= */
+  /* iPhone Safari slider touch fix */
+  useEffect(() => {
+    if (!isIPhoneSafari || !volumeRef.current) return;
+
+    const slider = volumeRef.current;
+
+    const allowTouch = (e) => {
+      e.stopPropagation();
+    };
+
+    slider.addEventListener("touchstart", allowTouch, { passive: true });
+    slider.addEventListener("touchmove", allowTouch, { passive: true });
+
+    return () => {
+      slider.removeEventListener("touchstart", allowTouch);
+      slider.removeEventListener("touchmove", allowTouch);
+    };
+  }, []);
+  /* ============================================ */
 
   const togglePlay = () => {
     wavesurfer.current.playPause();
@@ -243,15 +273,12 @@ export default function SongPlayer() {
       }}
     >
       <div style={{ width: "100%", maxWidth: "720px", padding: "20px" }}>
-        {/* TERMINAL HEADER */}
         <div style={{ position: "fixed", top: 10, left: 10 }}>_terminal</div>
 
-        {/* TITLE */}
         <h2 style={{ textAlign: "center", letterSpacing: "2px" }}>
           {id.replace(/-/g, " ").toUpperCase()}
         </h2>
 
-        {/* WAVEFORM */}
         <div
           ref={waveformRef}
           style={{
@@ -262,7 +289,6 @@ export default function SongPlayer() {
           }}
         />
 
-        {/* CONTROLS */}
         <div
           style={{
             display: "flex",
@@ -287,7 +313,6 @@ export default function SongPlayer() {
           </a>
         </div>
 
-        {/* VOLUME */}
         <div
           style={{
             marginTop: "14px",
@@ -299,6 +324,7 @@ export default function SongPlayer() {
         >
           VOL
           <input
+            ref={volumeRef}
             type="range"
             min="0"
             max="1"
@@ -309,11 +335,14 @@ export default function SongPlayer() {
               setVolume(v);
               wavesurfer.current.setVolume(v);
             }}
-            style={{ width: "140px", accentColor: "#00ff00" }}
+            style={{
+              width: "140px",
+              accentColor: "#00ff00",
+              touchAction: "none",
+            }}
           />
         </div>
 
-        {/* LYRICS */}
         <div
           style={{
             marginTop: "30px",
