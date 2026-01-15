@@ -114,18 +114,20 @@ function SphereWrapper() {
 
       {/* UPDATE LOG */}
       <div className="update-log-wrapper">
-        <div className="update-log-header">UPDATE LOG V2.0</div>
+        <div className="update-log-header">UPDATE LOG V3.0</div>
         <div className="update-log-body">
-          • Update 2.0 is here!<br />
-          • Added this Update Log! :)<br />
-          • Added Social Buttons to my Music, Instagram and Linktree<br />
-          • New CRT scanlines<br />
-          • Added flicker bands for a more "computery" feel, gridlines and glow<br />
-          • New aesthetic background gridlines<br />
-          • Added more aesthetic neon green glow<br />
-          • New Song! FYE (Solo)<br />
-          • Passkey required for Lost Files and FYE (Solo)<br />
-          • Volume Slider tweaked and fixed<br />
+          • Update 3.0 is here!<br />
+          • Mobile user friendly now! :) will be even more stable and better in future updates, but usable and functional right now<br />
+          • Rotatable Sphere on phone<br />
+          • Steady unscrollable horizontally screen on phone<br />
+          • Update Log hidden only on phone<br />
+          • Social buttons resized and new layout only on phone<br />
+          • Single tap for song title, double tap on songnode to play the song for mobile only<br />
+          • Fixed autozoom issues on phone<br />
+          • Fixed Sphere dragging issues on PC<br />
+          • Higher sensitivity for dragging the Sphere<br />
+          • New error message displayed directly on website rather than browser for incorrect passkey inputs<br />
+          • New message only for mobile users guiding them on how to use the website and open songnodes<br />
         </div>
       </div>
 

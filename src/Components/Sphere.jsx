@@ -248,6 +248,12 @@ export default function Sphere({ onSongClick }) {
 
   return (
     <>
+ {/* Mobile-only tap instruction */}
+<div className="mobile-tap-hint">
+  On mobile: single tap to see song title · double tap to open song player
+</div>
+
+
       <canvas
         ref={canvasRef}
         width={size}
@@ -276,3 +282,4 @@ export default function Sphere({ onSongClick }) {
     </>
   );
 }
+

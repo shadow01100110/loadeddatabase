@@ -683,3 +683,23 @@ body {
     font-size: 16px; /* prevents mobile auto-zoom on focus */
   }
 }
+
+.mobile-tap-hint {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .mobile-tap-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: #00ff00;
+  opacity: 0.7;
+  margin-bottom: 6px;
+  text-align: center;
+  font-family: monospace;
+  font-weight: normal;
+  pointer-events: none;
+}
+
+}
