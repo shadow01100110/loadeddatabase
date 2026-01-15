@@ -677,3 +677,9 @@ body {
     max-width: 90vw;
   }
 }
+
+@media (max-width: 768px) {
+  .passkey-modal input {
+    font-size: 16px; /* prevents mobile auto-zoom on focus */
+  }
+}
