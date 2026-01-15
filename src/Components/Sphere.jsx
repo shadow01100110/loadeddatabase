@@ -209,7 +209,7 @@ export default function Sphere({ onSongClick }) {
         width={size}
         height={size}
         className="sphere-canvas"
-        style={{ marginTop: "20px" }}
+        style={{ marginTop: "20px", touchAction: "none" }}
         onMouseMove={handleMouseMove}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
