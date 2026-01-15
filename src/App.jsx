@@ -83,8 +83,6 @@ function SphereWrapper() {
         loaded_database//
       </h1>
 
-      <Sphere onSongClick={handleSongClick} />
-
       {/* SOCIAL LINKS */}
       <div className="social-panel">
         <a href="https://www.instagram.com/loaded_rbl/" target="_blank" rel="noreferrer">
@@ -105,6 +103,10 @@ function SphereWrapper() {
         <a href="https://linktr.ee/LoadedRBL" target="_blank" rel="noreferrer">
           <FaLink />
         </a>
+      </div>
+
+      <div className="sphere-container">
+        <Sphere onSongClick={handleSongClick} />
       </div>
 
       {/* UPDATE LOG */}
