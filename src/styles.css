@@ -715,6 +715,36 @@ body {
   display: block;            /* force each line */
 }
 
+/* ===================================================== */
+/* iPHONE SAFARI VOLUME SLIDER FIX — ADD ONLY            */
+/* DOES NOT AFFECT DESKTOP OR IPAD                      */
+/* ===================================================== */
+
+/* iOS Safari detection */
+@supports (-webkit-touch-callout: none) {
+
+  /* Ensure range inputs receive touch on iPhone */
+  input[type="range"] {
+    -webkit-appearance: slider-horizontal;
+    appearance: auto;
+
+    touch-action: pan-x !important;
+    pointer-events: auto !important;
+  }
+
+  /* If slider is inside containers with touch-action: none */
+  .song-player input[type="range"],
+  .lyrics-box input[type="range"],
+  .audio-player input[type="range"] {
+    touch-action: pan-x !important;
+    pointer-events: auto !important;
+  }
+}
+
+
+
+
+
 }
 
 
