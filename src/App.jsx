@@ -37,6 +37,7 @@ function SphereWrapper() {
   const [titleAnimated, setTitleAnimated] = useState(false);
   const [passkeyActive, setPasskeyActive] = useState(false);
   const [passkeyValue, setPasskeyValue] = useState("");
+  const [passkeyError, setPasskeyError] = useState("");
   const [selectedSong, setSelectedSong] = useState(null);
 
   // Songs that require passkey
@@ -62,9 +63,10 @@ function SphereWrapper() {
   const handlePasskeySubmit = () => {
     if (passkeyValue === PASSKEY) {
       setPasskeyActive(false);
+      setPasskeyError("");
       window.location.hash = `/song/${selectedSong}`;
     } else {
-      alert("Incorrect passkey!");
+      setPasskeyError("ERROR: Incorrect passkey");
       setPasskeyValue("");
     }
   };
@@ -72,6 +74,7 @@ function SphereWrapper() {
   const handlePasskeyBack = () => {
     setPasskeyActive(false);
     setPasskeyValue("");
+    setPasskeyError("");
     setSelectedSong(null);
   };
 
@@ -138,8 +141,16 @@ function SphereWrapper() {
               type="text"
               placeholder="Enter 6-digit passkey"
               value={passkeyValue}
-              onChange={(e) => setPasskeyValue(e.target.value)}
+              onChange={(e) => {
+                setPasskeyValue(e.target.value);
+                setPasskeyError("");  // Clear error when typing
+              }}
             />
+            {passkeyError && (
+              <div className="passkey-error">
+                {passkeyError}
+              </div>
+            )}
             <div style={{ marginTop: "12px" }}>
               <button onClick={handlePasskeySubmit}>Submit</button>
               <button onClick={handlePasskeyBack}>Back</button>

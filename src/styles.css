@@ -568,6 +568,24 @@ body {
   margin-left: 10px; /* space between submit and back button */
 }
 
+.passkey-error {
+  margin-top: 10px;
+  padding: 6px 10px;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.85rem;
+  color: #ff3333;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff3333;
+  text-shadow: 0 0 4px rgba(255, 0, 0, 0.5);
+  animation: error-flash 0.3s ease;
+}
+
+@keyframes error-flash {
+  0% { opacity: 0; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* ================= MOBILE ONLY ================= */
 @media (max-width: 768px) {
 
