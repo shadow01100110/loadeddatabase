@@ -692,21 +692,29 @@ body {
 /* Touch devices ONLY — never desktop */
 @media (hover: none) and (pointer: coarse) {
   .mobile-tap-hint {
-    display: block;
-    position: absolute;
-    top: calc(50% - 325px);
-    left: 50%;
-    transform: translateX(-50%);
+  display: block;
+  position: absolute;
+  top: calc(50% - 325px);  /* raise a bit higher for iPad + iPhone */
+  left: 50%;
+  transform: translateX(-50%);
 
-    font-size: 0.6rem;
-    color: #00ff00;
-    opacity: 0.75;
-    font-family: monospace;
-    font-weight: normal;
+  font-size: 0.65rem;       /* readable on all mobiles */
+  line-height: 1.2;         /* slightly tighter lines */
+  text-align: center;
 
-    pointer-events: none;
-    z-index: 20;
-  }
+  color: #00ff00;
+  opacity: 0.75;            /* updated opacity */
+  font-family: monospace;
+  font-weight: normal;
+
+  pointer-events: none;
+  z-index: 20;
+}
+
+.mobile-tap-hint span {
+  display: block;            /* force each line */
+}
+
 }
 
 
