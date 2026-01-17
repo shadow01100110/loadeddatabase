@@ -41,9 +41,15 @@ function SphereWrapper() {
   const [selectedSong, setSelectedSong] = useState(null);
 
   // Songs that require passkey
-  const SONGS_REQUIRING_PASSKEY = ["lost-files", "fye-solo"];
+  const SONGS_REQUIRING_PASSKEY = ["lost-files", "fye-solo", "enigma"];
+
+  // Existing passkey
   const PASSKEY = "291024";
   const PASSKEY_HINT = "Birth of Originz";
+
+  // NEW Enigma passkey (ADDITION ONLY)
+  const ENIGMA_PASSKEY = "12231";
+  const ENIGMA_HINT = "Scour the Database, Chronological Order is key";
 
   useEffect(() => {
     setTitleAnimated(true);
@@ -61,7 +67,11 @@ function SphereWrapper() {
   };
 
   const handlePasskeySubmit = () => {
-    if (passkeyValue === PASSKEY) {
+    const isEnigma = selectedSong === "enigma";
+
+    const correctPasskey = isEnigma ? ENIGMA_PASSKEY : PASSKEY;
+
+    if (passkeyValue === correctPasskey) {
       setPasskeyActive(false);
       setPasskeyError("");
       window.location.hash = `/song/${selectedSong}`;
@@ -116,19 +126,12 @@ function SphereWrapper() {
       <div className="update-log-wrapper">
         <div className="update-log-header">UPDATE LOG V3.5</div>
         <div className="update-log-body">
-          • Update 3.5 is here!<br />
-          • Mobile and Ipad user friendly now! :) will be even more stable and better in future updates, but usable and functional right now<br />
-          • Rotatable Sphere on phone and Ipad<br />
-          • Steady unscrollable horizontally screen on phone and Ipad<br />
-          • Update Log hidden only on phone<br />
-          • Social buttons resized and new layout only on phone<br />
-          • Single tap for song title, double tap on songnode to play the song for mobile and Ipad only<br />
-          • Fixed autozoom issues on phone and Ipad<br />
-          • Removed volume slider for phone<br />
-          • Fixed Sphere dragging issues on PC<br />
-          • Higher sensitivity for dragging the Sphere<br />
-          • New error message displayed directly on website rather than browser for incorrect passkey inputs<br />
-          • New message only for mobile and Ipad users guiding them on how to use the website and open songnodes<br />
+          • Update 4.0 is here!<br />
+          • New Song! Enigma (Upcoming Release)<br />
+          • New Song Descriptions on every song<br />
+          • Originz ORIGINAL Lyrics added<br />
+          • Brand New Passkey for accessing Enigma<br />
+          • Sphere autorotation is now faster<br />
         </div>
       </div>
 
@@ -138,15 +141,15 @@ function SphereWrapper() {
           <div className="passkey-modal">
             <h3>Enter Passkey</h3>
             <p style={{ fontSize: "0.85rem", marginBottom: "10px", color: "#00ff00AA" }}>
-              Hint: {PASSKEY_HINT}
+              Hint: {selectedSong === "enigma" ? ENIGMA_HINT : PASSKEY_HINT}
             </p>
             <input
               type="text"
-              placeholder="Enter 6-digit passkey"
+              placeholder={selectedSong === "enigma" ? "Enter 5-digit passkey" : "Enter 6-digit passkey"}
               value={passkeyValue}
               onChange={(e) => {
                 setPasskeyValue(e.target.value);
-                setPasskeyError("");  // Clear error when typing
+                setPasskeyError("");
               }}
             />
             {passkeyError && (

@@ -6,6 +6,7 @@ const SONGS = [
   { id: 3, name: "Originz ORIGINAL ft. duvidha", slug: "originz-ft.-duvidha-original", lat: 101, lon: 180 },
   { id: 4, name: "Lost Files", slug: "lost-files", lat: -10, lon: 250 },
   { id: 5, name: "FYE (Solo)", slug: "fye-solo", lat: -60, lon: 60 },
+  { id: 6, name: "Enigma", slug: "enigma", lat: 84, lon: -254 },
 ];
 
 export default function Sphere({ onSongClick }) {
@@ -26,7 +27,7 @@ export default function Sphere({ onSongClick }) {
   useEffect(() => {
     let frame;
     const loop = () => {
-      setRotation(r => ({ x: r.x, y: r.y + 0.00015 }));
+      setRotation(r => ({ x: r.x, y: r.y + 0.00028 }));
       frame = requestAnimationFrame(loop);
     };
     loop();

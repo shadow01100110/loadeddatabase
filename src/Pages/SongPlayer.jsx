@@ -9,7 +9,12 @@ const isIPhone =
   !/iPad/.test(navigator.userAgent);
 
 const LYRICS_DB = {
-  "seek-ft.-duvidha": `Lyrics:
+  "seek-ft.-duvidha": `Description:
+
+broken free from the curse at last and aware of rebel, loader must save this reality of the future and scotty before the reckoning
+track 3/5 'Neuro Musik'
+
+Lyrics:
 
 unbecoming fate
 desire, annihilate
@@ -63,7 +68,12 @@ seek, kill, fuck and die decay
 seek, kill, fuck and die decay
 `,
 
-  "cyberstar": `Lyrics:
+  "cyberstar": `Description:
+
+the warp was successful, now rebellion is the final step of the mission he was sent out to do. in order to annihilate, deception is required
+track 2/5 'Neuro Musik'
+
+Lyrics:
 
 whoo
 whoo
@@ -106,17 +116,23 @@ cyberstar start drippin
 on the neuro-gas we tippin
 `,
 
-  "lost-files": `Loaded Tape V3 | Unloaded Tape Prelude
+  "lost-files": `Description:
 
 they wont like us
 they wont find us
 they wont stop us
+track 1/28 'Unloaded Tape'
 `,
 
-  "fye-solo": `Lyrics:
+  "fye-solo": `Description:
+
+the JACKBOYS just inspired a new generation, brownin out at the thought of glory. they ready to do whatever it takes before its too late
+track 2/7 'BLACKBOYS'
+
+Lyrics:
 
 hollup sis, sumn up
-yo spit fam. Yeah, we up we up
+yo spit fam. yeah, we up we up
 shit tonight fam?
 aight then, i'll bring the goods n that
 oh and, tell them motherfuckin boys we doin this
@@ -189,9 +205,99 @@ too fye for this list
 too fye for your shit
 `,
 
-  "originz-ft.-duvidha-original": `
-the birth of Loaded RBL
+  "originz-ft.-duvidha-original": `Description:
+
+once upon a time, in a unknown barren land centuries ago, a disciple by the name of scotty bestowed his wings and birthed Loaded RBL, but with it, gave the very defects that would curse his soul for eternity. this is originz
+track 1/1 'Originz'
 https://soundcloud.com/loaded-rbl/prod-sapjer-originz-ft-scotty-clouvre
+
+Lyrics:
+
+silver knife in my back, silverback going hard
+if he here to bang his chest I might take your fucking heart 
+rosemary shaft, white powder from afar
+if that za aint from my kingdom I might jetpack back to Mars 
+back in all black but we still in this bitch
+back to back packrunning all night in this shit
+sword on my hand, slaying ghouls in this hoe
+that bitch need an excorcist yeah she gon need to go
+
+its the autumn night chilling off with the gods
+hellhounds are my dogs, break my sword from the rod
+knights in all black, going gaurd, go vangaurd
+bitch we need no saving, only racks and fast cars 
+
+metal armour save me for slaying the devil 
+knighted by the council of mysterious people
+
+angel
+gaurdian
+theres a chalice of light that seems to beam
+spiral eyes in the sky watching down from above
+
+silver knife in my back, silverback going hard
+if he here to bang his chest I might take your fucking heart 
+rosemary shaft, white powder from afar
+if that za aint from my kingdom I might jetpack back to Mars 
+back in all black but we still in this bitch
+back to back packrunning all night in this shit
+sword on my hand, slaying ghouls in this hoe
+that bitch need an excorcist yeah she gon need to go
+
+`,
+
+"enigma": `Description:
+
+when the sun goes down, we up. let it consume you, for it is the one thing that feeds hunger
+track 1/1 'Enigma'
+
+Lyrics:
+
+loader, yeah
+
+shoutouts to my exes, im fuckin on, fuckin on cash (cash cash)
+im calling yo shit, yeah im callin up sayin i dont miss (givin the best)
+im poppin a perk, down it all and fulfil my wish, wish
+
+i know who you is, i know you and your biz and 
+i aint finna stop
+i feel outta the line
+im done feel outta line
+
+spend tens from my tenfolds
+gotta switch up the pace hoe
+i dont vibe with ten of yall
+got hennesy, now there way more
+get me a vanguard
+go go, call me duvidha and some gangs Mo
+
+walk around until imma
+walk around in black
+fuckin on this bitch and i done fuck with all this sass
+come out swingin guns driftin tokyo, smoke that pack
+
+i double it
+i triple it
+im geekin
+i forgettin that
+yall dry as fuck lame as fuck bitches 
+never gon get to ever feel the high that im feelin yea
+
+im feelin it, but yall dreamin it
+
+walk around in black, walk around in all black drip (flash)
+Walk round fuck they say, man fuck them, im the fame (stop it)
+and thats the name of the game, go dumb go stupid, wham (blam)
+not gonna run away, go dumb, go stupid away (gang)
+
+walk around in all black, walk around in all black
+i be outta whack, i be on whack
+go
+go
+go
+go
+woah
+
 `,
 };
 
