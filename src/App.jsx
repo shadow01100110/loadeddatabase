@@ -124,7 +124,7 @@ function SphereWrapper() {
 
       {/* UPDATE LOG */}
       <div className="update-log-wrapper">
-        <div className="update-log-header">UPDATE LOG V3.5</div>
+        <div className="update-log-header">UPDATE LOG V4.0</div>
         <div className="update-log-body">
           • Update 4.0 is here!<br />
           • New Song! Enigma (Upcoming Release)<br />
