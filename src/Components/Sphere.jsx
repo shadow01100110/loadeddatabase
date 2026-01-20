@@ -6,7 +6,7 @@ const SONGS = [
   { id: 3, name: "Originz ORIGINAL ft. duvidha", slug: "originz-ft.-duvidha-original", lat: 101, lon: 180 },
   { id: 4, name: "Lost Files", slug: "lost-files", lat: -10, lon: 250 },
   { id: 5, name: "FYE (Solo)", slug: "fye-solo", lat: -60, lon: 60 },
-  { id: 6, name: "Enigma", slug: "enigma", lat: 84, lon: -254 },
+  { id: 6, name: "ENIGMA", slug: "enigma", lat: 84, lon: -254 },
 ];
 
 export default function Sphere({ onSongClick }) {

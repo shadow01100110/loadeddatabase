@@ -249,7 +249,7 @@ that bitch need an excorcist yeah she gon need to go
 "enigma": `Description:
 
 when the sun goes down, we up. let it consume you, for it is the one thing that feeds hunger
-track 1/1 'Enigma'
+track 1/1 'ENIGMA'
 
 Lyrics:
 

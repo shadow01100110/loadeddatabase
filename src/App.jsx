@@ -127,7 +127,7 @@ function SphereWrapper() {
         <div className="update-log-header">UPDATE LOG V4.0</div>
         <div className="update-log-body">
           • Update 4.0 is here!<br />
-          • New Song! Enigma (Upcoming Release)<br />
+          • New Song! ENIGMA (Upcoming Release)<br />
           • New Song Descriptions on every song<br />
           • Originz ORIGINAL Lyrics added<br />
           • Brand New Passkey for accessing Enigma<br />
