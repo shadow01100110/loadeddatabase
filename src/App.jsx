@@ -41,15 +41,18 @@ function SphereWrapper() {
   const [selectedSong, setSelectedSong] = useState(null);
 
   // Songs that require passkey
-  const SONGS_REQUIRING_PASSKEY = ["lost-files", "fye-solo", "enigma"];
+  const SONGS_REQUIRING_PASSKEY = ["lost-files", "fye-solo", "heartstrings", "beating-ft.-duvidha"];
 
   // Existing passkey
   const PASSKEY = "291024";
   const PASSKEY_HINT = "Birth of Originz";
 
   // NEW Enigma passkey (ADDITION ONLY)
-  const ENIGMA_PASSKEY = "12231";
-  const ENIGMA_HINT = "Scour the Database, Chronological Order is key";
+  const HEARTSTRINGS_PASSKEY = "BLEED";
+  const HEARTSTRINGS_HINT = "What does a heart do when it breaks? (In All Caps)";
+
+  const BEATING_PASSKEY = "LOVE";
+  const BEATING_HINT = "What does a heart skip a beat for? (In All Caps)";
 
   useEffect(() => {
     setTitleAnimated(true);
@@ -67,9 +70,18 @@ function SphereWrapper() {
   };
 
   const handlePasskeySubmit = () => {
-    const isEnigma = selectedSong === "enigma";
+    const isHeartstrings = selectedSong === "heartstrings";
+    const isBeating = selectedSong === "beating-ft.-duvidha";
 
-    const correctPasskey = isEnigma ? ENIGMA_PASSKEY : PASSKEY;
+    let correctPasskey = PASSKEY;
+
+if (isHeartstrings) {
+  correctPasskey = HEARTSTRINGS_PASSKEY;
+}
+
+if (isBeating) {
+  correctPasskey = BEATING_PASSKEY;
+}
 
     if (passkeyValue === correctPasskey) {
       setPasskeyActive(false);
@@ -124,14 +136,13 @@ function SphereWrapper() {
 
       {/* UPDATE LOG */}
       <div className="update-log-wrapper">
-        <div className="update-log-header">UPDATE LOG V4.0</div>
+        <div className="update-log-header">UPDATE LOG V4.2</div>
         <div className="update-log-body">
-          • Update 4.0 is here!<br />
-          • New Song! ENIGMA (Upcoming Release)<br />
-          • New Song Descriptions on every song<br />
-          • Originz ORIGINAL Lyrics added<br />
-          • Brand New Passkey for accessing Enigma<br />
-          • Sphere autorotation is now faster<br />
+          • Update 4.2 is here!<br />
+          • New Song! Heartstrings (Upcoming Release)<br />
+          • New Song! Beating ft. duvidha (Upcoming Release)<br />
+          • Brand New Passkey for accessing Heartstrings<br />
+          • Brand New Passkey for accessing Beating ft. duvidha<br />
         </div>
       </div>
 
@@ -141,11 +152,24 @@ function SphereWrapper() {
           <div className="passkey-modal">
             <h3>Enter Passkey</h3>
             <p style={{ fontSize: "0.85rem", marginBottom: "10px", color: "#00ff00AA" }}>
-              Hint: {selectedSong === "enigma" ? ENIGMA_HINT : PASSKEY_HINT}
+              Hint:
+{
+  selectedSong === "heartstrings"
+    ? HEARTSTRINGS_HINT
+    : selectedSong === "beating-ft.-duvidha"
+    ? BEATING_HINT
+    : PASSKEY_HINT
+}
             </p>
             <input
               type="text"
-              placeholder={selectedSong === "enigma" ? "Enter 5-digit passkey" : "Enter 6-digit passkey"}
+              placeholder={
+  selectedSong === "heartstrings"
+    ? "Enter 5 letter passkey"
+    : selectedSong === "beating-ft.-duvidha"
+    ? "Enter 4 letter passkey"
+    : "Enter 6-digit passkey"
+}
               value={passkeyValue}
               onChange={(e) => {
                 setPasskeyValue(e.target.value);

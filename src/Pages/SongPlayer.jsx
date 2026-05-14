@@ -299,6 +299,112 @@ go
 woah
 
 `,
+
+"heartstrings": `Description:
+
+bloody strings left twine, played like a harp and it shines
+track 3/10 'composition'
+
+Lyrics:
+
+no way
+i'm caved in, gasping no way
+i'm breathin, beat to the hay
+
+you're playin with my heart
+its ringin like a harp
+through these heartstrings i love
+i love
+
+go go
+yea saint lauren the way (way)
+i go on that jit and then i done it all the way (way)
+diamonds droppin down the skin, denim saggin lower (lower)
+if i done redeemed myself, ill see you up higher (go)
+
+how could i say that you mad at me
+how could i say you dont lie to me
+how about you bring that ride on me
+baby stop the lies with me
+
+i got hella guap on the floor, mop it down (chew chew)
+comin to my block, lets see what you about (whaoo)
+
+these bitches dickridin me
+call up haaland, score for me
+they so addictive like ecstacy
+im breaking bad, methempathamine (whoo)
+get me some ketamine, gettin hot in here, check the humidity (bounce bounce)
+yea yea yea yea yea
+
+bitch
+im gonna horde em ricks
+i, i got a whole lotta licks
+i love me a good chase
+i love a whole lotta shit yea
+
+im on the screen yea
+living the dream yea
+runnin another hunnid miles
+need me the options yea
+
+no way (i need me-)
+i'm caved in, gasping no way
+i'm breathin, beat to the hay
+
+you're playin with my heart
+its ringin like a harp
+through these heartstrings i love
+i love
+
+`,
+
+"beating-ft.-duvidha": `Description:
+
+through the beatings endured, his heart still beats for more
+track 4/10 'composition'
+
+Lyrics:
+
+can you be my world
+can you be my heart
+can you be my star
+lets take this afar
+
+that look on your face is so intoxicating
+the way you move those hips like nobodys business
+i tried, i tried to change for you
+i cried, i cried to see it through
+
+yeah
+lets go
+lets go
+loaderrrr (whao whao go)
+
+
+i'm gon run outta time, she gon treat me right (she an angel)
+i'm runnin outta light, now it gon be on sight (get em right)
+all this chrome on, shiny as stainless steel now
+she got that crop top on, now its off and gone down
+
+come and undress you down, i'm tryna please you here
+we can go slow it down, dear, you ain't nun to fear oh ya   
+cara mia, mamacita  
+i've been coming up all near ya
+under your skin lemme see ya 
+ 
+i'm tryna be up all on you (whoo), up to your tethered flesh and blood (bitch bitch)
+and i've been obsessed with it, it be fucking with my system (woah)
+and my mind ends up being dragged through the mud (ooooooo)
+and its okay cause you're the only one i love
+
+you make my heart beat a thousand miles
+you made me see, what love really ties
+
+i tried, i tried to change for you
+i cried, i cried to see it through
+
+`,
 };
 
 export default function SongPlayer() {
